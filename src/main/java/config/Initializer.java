@@ -19,9 +19,13 @@ public class Initializer implements ServletContextListener {
 
         if (tasks.size() != 0) return;
 
-        Task work = new Task(1, TaskType.WORK, "Renew schedule", Date.valueOf("2022-06-16"), 1);
-        Task home = new Task(1, TaskType.HOME, "Do laundry", Date.valueOf("2022-06-18"), 1);
-        Task hobby = new Task(1, TaskType.HOBBY, "Walk in park", Date.valueOf("2022-06-19"), 1);
+        Task work = new Task(TaskType.WORK, "Renew schedule", Date.valueOf("2022-06-16"), 1, false);
+        Task home = new Task(TaskType.HOME, "Do laundry", Date.valueOf("2022-06-18"), 1, false);
+        Task hobby = new Task(TaskType.HOBBY, "Walk in park", Date.valueOf("2022-06-19"), 1, false);
+
+        work.setId(1);
+        home.setId(2);
+        hobby.setId(3);
 
         applicationService.taskDao.add(work);
         applicationService.taskDao.add(home);
