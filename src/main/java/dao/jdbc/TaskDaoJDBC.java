@@ -40,7 +40,27 @@ public class TaskDaoJDBC implements TaskDao {
 
     @Override
     public Task get(Integer id) {
-        return null;
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT type, name, due_date, estimate FROM tasks WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) return null;
+
+            TaskType type = TaskType.valueOf(resultSet.getString(1));
+            String name = resultSet.getString(2);
+            Date dueDate = resultSet.getDate(3);
+            Integer estimate = resultSet.getInt(4);
+
+            Task task = new Task(id, type, name, dueDate, estimate);
+
+            return task;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
