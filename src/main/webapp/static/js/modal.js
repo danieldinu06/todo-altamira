@@ -2,8 +2,6 @@ const addBtn = document.querySelector(".add-button");
 const modal = document.querySelector(".modal");
 const span = document.querySelector(".close-modal");
 
-const todayDate = new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+(new Date().getDate());
-
 addBtn.addEventListener("click", () => {
     modal.style.display = "block";
 
@@ -15,9 +13,20 @@ addBtn.addEventListener("click", () => {
     const type = document.querySelector("#task-type");
 
     submitBtn.addEventListener("click", (e) => {
-        if (dueDate.value < todayDate) {
+        if (name.value === "") {
             e.preventDefault();
-            console.log(dueDate.value);
+            alert("Name field can't be empty!");
+        } else if (type.value === "none") {
+            e.preventDefault();
+            alert("Please select a type!");
+        } else if (Date.parse(dueDate.value) < Date.now()) {
+            e.preventDefault();
+            alert("Due date must not be in the past!");
+        } else if (dueDate.value === "") {
+            e.preventDefault();
+            alert("Due date can't be empty!");
+        } else {
+            modal.style.display = "none";
         }
     })
 });
