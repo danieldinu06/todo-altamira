@@ -1,0 +1,12 @@
+header, .todo-container {
+    min-height: 20vh;
+    margin: 0 20vw 0 20vw;
+    display: flex;
+    align-items: center;
+}
+
+header {
+    font-size: 1.5rem;
+    font-family: "Courier 10 Pitch", serif;
+    justify-content: center;
+}
