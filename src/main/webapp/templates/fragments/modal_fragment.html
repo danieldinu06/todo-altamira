@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<div th:fragment="modal_fragment" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <form action="/" method="POST">
+            <input type="text" placeholder="name" id="name">
+            <input type="date" placeholder="due date" id="due-date">
+            <input type="text" placeholder="estimate time" id="estimate">
+            <div class="select-type">
+                <select name="type" id="task-type">
+                    <option value="none" selected disabled>Select a type</option>
+                    <option value="work">Work</option>
+                    <option value="home">Home</option>
+                    <option value="hobby">Hobby</option>
+                </select>
+            </div>
+        </form>
+        <button class="submit-modal">
+            <i class='bx bxs-layer-plus'></i>
+        </button>
+    </div>
+</div>
