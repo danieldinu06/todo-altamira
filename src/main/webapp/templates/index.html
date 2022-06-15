@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+    <link rel="stylesheet" th:href="@{/static/css/user.css}">
+    <link rel="stylesheet" th:href="@{/static/css/sorter.css}">
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" th:href="@{/static/css/button.css}">
+    <link rel="stylesheet" th:href="@{/static/css/list.css}">
+    <link rel="stylesheet" th:href="@{/static/css/modal.css}">
+
+
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../../../../node_modules/bulma-calendar/dist/css/bulma-calendar.min.css" rel="stylesheet">
+
+    <title>ToDo List</title>
+</head>
+<body>
+    <h2>Altamira User</h2>
+
+    <header>
+        <h1>My ToDo List</h1>
+    </header>
+
+    <div class="select">
+        <select name="todos" class="filter-todo">
+            <option value="all">All</option>
+            <option value="ascending">Date Ascending</option>
+            <option value="descending">Date Descending</option>
+        </select>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <form action="/" method="POST">
+                <input type="text" placeholder="name" id="name">
+                <input type="date" placeholder="due date" id="due-date">
+                <input type="text" placeholder="estimate time" id="estimate">
+                <div class="select-type">
+                    <select name="type" id="task-type">
+                        <option value="none" selected disabled>Select a type</option>
+                        <option value="work">Work</option>
+                        <option value="home">Home</option>
+                        <option value="hobby">Hobby</option>
+                    </select>
+                </div>
+            </form>
+            <button class="submit-modal">
+                <i class='bx bxs-layer-plus'></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="todo-container">
+        <ul class="todo-list">
+            <div th:replace="fragments/tasks_fragments.html :: tasks_fragments"></div>
+        </ul>
+
+        <button class="add-button">
+            Add Task
+        </button>
+    </div>
+
+    <script th:src="@{/static/js/script.js}"></script>
+    <script th:src="@{/static/js/modal.js}"></script>
+    <script th:src="@{/node_modules/bulma-calendar/dist/js/bulma-calendar.min.js}"></script>
+</body>
+</html>
