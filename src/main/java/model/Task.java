@@ -10,13 +10,14 @@ public class Task {
     private final String name;
     private final Date dueDate;
     private final Integer estimate;
+    private boolean completed;
 
-    public Task(Integer id, TaskType type, String name, Date dueDate, Integer estimate) {
-        this.id = id;
+    public Task(TaskType type, String name, Date dueDate, Integer estimate, boolean completed) {
         this.type = type;
         this.name = name;
         this.dueDate = dueDate;
         this.estimate = estimate;
+        this.completed = completed;
     }
 
     public void setId(Integer id) {
@@ -41,5 +42,13 @@ public class Task {
 
     public Integer getEstimate() {
         return estimate;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
