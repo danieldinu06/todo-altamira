@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<div th:fragment="tasks_fragments">
+    <th:block th:each="task : ${tasks}">
+        <div class="todo-component">
+            <li th:text="${task.getName()}">Task</li>
+            <button class="check">
+                <i class='bx bx-check'></i>
+            </button>
+            <button class="delete">
+                <i class='bx bx-trash' ></i>
+            </button>
+        </div>
+    </th:block>
+</div>
