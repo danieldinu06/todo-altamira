@@ -14,7 +14,8 @@ CREATE TABLE tasks
     type        TASK_TYPE,
     name        VARCHAR,
     due_date    TIMESTAMP WITHOUT TIME ZONE,
-    estimate    INT
+    estimate    INT,
+    completed   BOOLEAN
 );
 
 ALTER TABLE ONLY tasks
