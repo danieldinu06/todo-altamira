@@ -9,11 +9,16 @@
     transition: all 0.3s ease;
 }
 
+.todo-component form {
+    display: flex;
+    flex-direction: row;
+}
+
 .check, .delete {
     background: #ff6f47;
     color: #ffffff;
     border: none;
-    padding: 1rem;
+    padding: 1.2rem;
     cursor: pointer;
     font-size: 1rem;
 }
