@@ -3,10 +3,11 @@ select {
     -moz-appearance: none;
     outline: none;
     border: none;
-    width: 10rem;
+    width: 15rem;
     background: #ffffff;
     text-align: start;
-    padding: 0.5rem;
+    font-size: 1rem;
+    padding: 1rem;
 }
 
 .select {
@@ -23,7 +24,7 @@ select {
     background: #ff6f47;
     top: 0;
     right: 0;
-    padding: 0.5rem;
+    padding: 1rem;
     pointer-events: none;
 }
 
