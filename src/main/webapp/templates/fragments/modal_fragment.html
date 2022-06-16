@@ -2,7 +2,7 @@
 <div th:fragment="modal_fragment" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
-        <form action="/api/tasks" method="post">
+        <form action="api/tasks" method="post" class="modalForm">
             <input type="text" placeholder="name" id="name" name="name">
             <input type="date" placeholder="due date" id="due-date" name="dueDate">
             <input type="text" placeholder="estimate time" id="estimate" name="estimate">
