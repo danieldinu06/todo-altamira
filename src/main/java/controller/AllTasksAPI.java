@@ -39,7 +39,6 @@ public class AllTasksAPI extends HttpServlet {
         String reader = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
         JsonObject jsonTask = new Gson().fromJson(reader, JsonObject.class);
-        System.out.println(jsonTask);
 
         String name = jsonTask.get("name").getAsString();
         Date dueDate = Date.valueOf(jsonTask.get("dueDate").getAsString());
