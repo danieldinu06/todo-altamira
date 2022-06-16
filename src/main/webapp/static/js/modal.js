@@ -6,15 +6,17 @@ const btnForm = document.querySelector("#btnForm");
 addBtn.addEventListener("click", () => {
     modal.style.display = "block";
 
-    const submitBtn = document.querySelector(".submit-modal");
+    const form = document.querySelector(".modalForm");
+    const submitForm = document.querySelector(".submit-modal");
 
     const name = document.querySelector("#name");
     const dueDate = document.querySelector("#due-date");
     const estimate = document.querySelector("#estimate");
     const type = document.querySelector("#task-type");
 
-    btnForm.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         if (name.value === "") {
             alert("Name field can't be empty!");
             return;
@@ -43,30 +45,29 @@ addBtn.addEventListener("click", () => {
             color = "green";
         }
 
-        const response = await fetch('/api/tasks');
-        let tasks = await response.json();
+        // const response = await fetch('/api/tasks');
+        // let tasks = await response.json();
 
         let newTask = {
-            id: tasks[0].id + 1,
             type: type.value.toUpperCase(),
             color: color,
             name: name.value,
             dueDate: dueDate.value,
-            estimate: estimate.value === "" ? '0' : estimate,
-            completed: false
+            estimate: (estimate.value === "" ? '0' : estimate.value),
         };
 
-        tasks.push(newTask);
-        console.log(tasks);
+        // tasks.push(newTask);
 
         const request = await fetch("/api/tasks", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(tasks)
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newTask)
         });
 
         modal.style.display = "none";
-    })
+    });
 });
 
 span.addEventListener("click", () => {
