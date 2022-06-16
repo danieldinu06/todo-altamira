@@ -1,3 +1,9 @@
+const checkBtns = document.querySelectorAll(".check");
+const deleteBtns = document.querySelectorAll(".delete");
+
+deleteBtns.forEach(del);
+checkBtns.forEach(check);
+
 function del(btn) {
     btn.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -28,7 +34,6 @@ function check(btn) {
 
         const response = await fetch('/api/task/' + btnId);
         let task = await response.json();
-        console.log(task);
 
         task.completed = true;
 
