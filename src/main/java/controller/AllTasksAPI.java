@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import model.Task;
 import model.util.TaskType;
 import service.ApplicationService;
@@ -10,11 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/api/tasks"})
 public class AllTasksAPI extends HttpServlet {
@@ -33,13 +36,18 @@ public class AllTasksAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ApplicationService applicationService = ApplicationService.getInstance();
 
-        String name = request.getParameter("name");
-        Date dueDate = Date.valueOf(request.getParameter("dueDate"));
-        TaskType type = TaskType.valueOf(request.getParameter("type").toUpperCase());
+        String reader = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+
+        JsonObject jsonTask = new Gson().fromJson(reader, JsonObject.class);
+        System.out.println(jsonTask);
+
+        String name = jsonTask.get("name").getAsString();
+        Date dueDate = Date.valueOf(jsonTask.get("dueDate").getAsString());
+        TaskType type = TaskType.valueOf(jsonTask.get("type").getAsString().toUpperCase());
 
         Integer estimate = 0;
-        if (!Objects.equals(request.getParameter("estimate"), ""))
-            estimate = Integer.valueOf(request.getParameter("estimate"));
+        if (!Objects.equals(jsonTask.get("estimate").getAsString(), ""))
+            estimate = Integer.valueOf(jsonTask.get("estimate").getAsString());
 
         String color = "purple";
         if (type == TaskType.HOME) {
