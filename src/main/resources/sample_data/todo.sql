@@ -15,7 +15,10 @@ CREATE TABLE tasks
     name        VARCHAR,
     due_date    TIMESTAMP WITHOUT TIME ZONE,
     estimate    INT,
-    completed   BOOLEAN
+    completed   BOOLEAN,
+    color       VARCHAR,
+    creation    TIMESTAMP WITHOUT TIME ZONE,
+    days_left   INT
 );
 
 ALTER TABLE ONLY tasks
