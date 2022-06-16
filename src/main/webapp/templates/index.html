@@ -29,9 +29,9 @@
 
     <div class="select">
         <select name="todos" class="filter-todo">
-            <option value="all">All</option>
-            <option value="ascending">Date Ascending</option>
-            <option value="descending">Date Descending</option>
+            <option value="all" selected disabled>All</option>
+            <option value="ascending">Due Date Ascending</option>
+            <option value="descending">Due Date Descending</option>
         </select>
     </div>
 
@@ -46,8 +46,9 @@
     </div>
 
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-    <script th:src="@{/static/js/script.js}"></script>
+    <script th:src="@{/static/js/buttons.js}"></script>
     <script th:src="@{/static/js/modal.js}"></script>
+    <script th:src="@{/static/js/sort.js}"></script>
 <!--    <script th:src="@{/node_modules/bulma-calendar/dist/js/bulma-calendar.min.js}"></script>-->
 </body>
 </html>
