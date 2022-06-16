@@ -18,7 +18,7 @@ public class TaskDaoJDBC implements TaskDao {
     @Override
     public void add(Task task) {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO tasks (type, name, due_date, estimate, completed) VALUES (?::TASK_TYPE, ?, ?, ?, ?)";
+            String sql = "INSERT INTO tasks (type, name, due_date, estimate, completed, color, creation, days_left) VALUES (?::TASK_TYPE, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             statement.setString(1, task.getType().toString());
@@ -26,6 +26,9 @@ public class TaskDaoJDBC implements TaskDao {
             statement.setDate(3, task.getDueDate());
             statement.setInt(4, task.getEstimate());
             statement.setBoolean(5, task.isCompleted());
+            statement.setString(6, task.getColor());
+            statement.setDate(7, task.getCreationDate());
+            statement.setInt(8, task.getDaysLeft());
 
             statement.executeUpdate();
 
@@ -58,7 +61,7 @@ public class TaskDaoJDBC implements TaskDao {
     @Override
     public Task get(Integer id) {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT type, name, due_date, estimate, completed FROM tasks WHERE id = ?";
+            String sql = "SELECT type, name, due_date, estimate, completed, color, creation, days_left FROM tasks WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setInt(1, id);
@@ -71,9 +74,15 @@ public class TaskDaoJDBC implements TaskDao {
             Date dueDate = resultSet.getDate(3);
             Integer estimate = resultSet.getInt(4);
             boolean completed = resultSet.getBoolean(5);
+            String color = resultSet.getString(6);
+            Date creationDate = resultSet.getDate(7);
+            Integer daysLeft = resultSet.getInt(8);
 
             Task task = new Task(type, name, dueDate, estimate, completed);
             task.setId(id);
+            task.setColor(color);
+            task.setCreationDate(creationDate);
+            task.setDaysLeft(daysLeft);
 
             return task;
 
@@ -85,7 +94,7 @@ public class TaskDaoJDBC implements TaskDao {
     @Override
     public List<Task> getAll() {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT id, type, name, due_date, estimate, completed FROM tasks";
+            String sql = "SELECT id, type, name, due_date, estimate, completed, color, creation, days_left FROM tasks ORDER BY creation";
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
 
             List<Task> result = new ArrayList<>();
@@ -96,9 +105,15 @@ public class TaskDaoJDBC implements TaskDao {
                 Date dueDate = resultSet.getDate(4);
                 Integer estimate = resultSet.getInt(5);
                 boolean completed = resultSet.getBoolean(6);
+                String color = resultSet.getString(7);
+                Date creationDate = resultSet.getDate(8);
+                Integer daysLeft = resultSet.getInt(9);
 
                 Task task = new Task(type, name, dueDate, estimate, completed);
                 task.setId(id);
+                task.setColor(color);
+                task.setCreationDate(creationDate);
+                task.setDaysLeft(daysLeft);
 
                 result.add(task);
             }
