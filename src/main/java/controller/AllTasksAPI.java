@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet(urlPatterns = {"/api/tasks"})
 public class AllTasksAPI extends HttpServlet {
@@ -34,8 +35,11 @@ public class AllTasksAPI extends HttpServlet {
 
         String name = request.getParameter("name");
         Date dueDate = Date.valueOf(request.getParameter("dueDate"));
-        Integer estimate = Integer.valueOf(request.getParameter("estimate"));
         TaskType type = TaskType.valueOf(request.getParameter("type").toUpperCase());
+
+        Integer estimate = 0;
+        if (!Objects.equals(request.getParameter("estimate"), ""))
+            estimate = Integer.valueOf(request.getParameter("estimate"));
 
         String color = "purple";
         if (type == TaskType.HOME) {
