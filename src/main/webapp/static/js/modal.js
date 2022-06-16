@@ -65,24 +65,6 @@ addBtn.addEventListener("click", () => {
             body: JSON.stringify(tasks)
         });
 
-        let divTask = document.createElement("div");
-        divTask.classList.add("todo-component");
-        divTask.innerHTML =
-            `<li>
-                <div>${name.value}</div>
-                <div>Due date: ${dueDate.value}</div>
-                <form action="" method="post" id="btnForm">
-                    <button class="check" name="check" value="check-${newTask.id}">
-                        <i class='bx bx-check'></i>
-                    </button>
-                    <button class="delete" name="delete" value="'delete-${newTask.id}">
-                        <i class='bx bx-trash' ></i>
-                    </button>
-                </form>
-            </li>`;
-
-        document.querySelector(".todo-list").innerHTML += divTask.outerHTML;
-
         modal.style.display = "none";
     })
 });
