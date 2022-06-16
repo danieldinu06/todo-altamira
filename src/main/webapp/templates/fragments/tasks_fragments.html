@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <ul th:fragment="tasks_fragments" class="todo-list">
     <th:block th:each="task : ${tasks}">
-        <div class="todo-component">
+        <div th:class="'todo-component '+(${task.isCompleted()} != false ? 'completed' : '')">
             <li>
-                <div th:text="${task.getName()}">
+                <div th:text="${task.getName()}" th:style="'color: '+${task.getColor()}">
                     Task Name
                 </div>
 
-                <div th:text="'Due date: ' + ${task.getDueDate()}">
+                <div th:text="'Due date: ' + ${task.getDueDate()}" th:style="'color: '+ (${task.getDaysLeft()} == 1 ? 'red' : '')">
                     Task Due Date
+                </div>
+
+                <div th:text="'Days Left: ' + (${task.getDaysLeft()} < 0 ? '0' : ${task.getDaysLeft()})">
+                    Days Left
                 </div>
             </li>
             <form action="" method="post" id="btnForm">
                 <button class="check" name="check" th:value="'check-' + ${task.getId()}">
                     <i class='bx bx-check'></i>
                 </button>
-                <button class="delete" name="delete" th:value="'delete-' + ${task.getId()}">
+                <button class="delete" name="delete" th:value="'delete-' + ${task.getId()}" th:disabled="${task.isCompleted()} != false">
                     <i class='bx bx-trash' ></i>
                 </button>
             </form>
